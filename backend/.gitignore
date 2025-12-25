@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Build/Dist
+dist/
+
+# Test coverage
+coverage/
+
+# Generated folders
+reports/
+uploads/
+
+# Logs
+*.log

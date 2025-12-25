@@ -1,0 +1,90 @@
+.page-header {
+    margin-bottom: 40px;
+}
+
+.add-card {
+    border-radius: var(--border-radius-lg);
+}
+
+.add-section {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 16px 0 !important;
+}
+
+.add-field {
+    flex: 1 1 400px;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 32px;
+    margin-top: 32px;
+}
+
+.category-card {
+    transition: var(--transition-standard);
+    border-radius: var(--border-radius-lg) !important;
+    cursor: default;
+}
+
+.category-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+.card-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.category-name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.id-badge {
+    font-size: 0.75rem;
+    color: var(--primary);
+    background: rgba(79, 70, 229, 0.08);
+    padding: 6px 12px;
+    border-radius: 10px;
+    width: fit-content;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.card-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.edit-actions {
+    display: flex;
+    gap: 12px;
+}
+
+mat-card-content {
+    padding: 24px !important;
+}
+
+::ng-deep .add-section .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+}

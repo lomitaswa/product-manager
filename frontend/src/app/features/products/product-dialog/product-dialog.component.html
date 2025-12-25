@@ -1,0 +1,55 @@
+<h2 mat-dialog-title>{{ isEdit ? 'Edit Product' : 'Add New Product' }}</h2>
+<mat-dialog-content>
+    <form [formGroup]="productForm" class="dialog-form">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Product Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter product name">
+            <mat-error *ngIf="productForm.get('name')?.hasError('required')">Name is required</mat-error>
+        </mat-form-field>
+
+        <div class="row">
+            <mat-form-field appearance="outline" class="half-width" floatLabel="always">
+                <mat-label>Price</mat-label>
+                <input matInput type="number" formControlName="price" placeholder="0.00">
+                <span matPrefix>₹&nbsp;</span>
+                <mat-error *ngIf="productForm.get('price')?.hasError('required')">Price is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="half-width">
+                <mat-label>Category</mat-label>
+                <mat-select formControlName="category_id">
+                    <mat-option *ngFor="let cat of categories" [value]="cat.id">
+                        {{ cat.name }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="productForm.get('category_id')?.hasError('required')">Category is required</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="image-section">
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Image (URL or Upload)</mat-label>
+                <input matInput formControlName="image_url" placeholder="Paste URL or upload below">
+            </mat-form-field>
+
+            <div class="upload-controls">
+                <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" hidden>
+                <button mat-stroked-button color="accent" type="button" (click)="fileInput.click()">
+                    <mat-icon>upload</mat-icon> Upload Image
+                </button>
+                <span class="file-info" *ngIf="selectedFile">{{ selectedFile.name }}</span>
+            </div>
+        </div>
+
+        <div *ngIf="productForm.get('image_url')?.value" class="preview-container">
+            <p class="preview-label">Image Preview:</p>
+            <img [src]="productForm.get('image_url')?.value" class="preview-img">
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="productForm.invalid" (click)="onSubmit()">
+        {{ isEdit ? 'Save Changes' : 'Create Product' }}
+    </button>
+</mat-dialog-actions>

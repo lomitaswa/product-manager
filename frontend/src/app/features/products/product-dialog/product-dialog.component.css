@@ -1,0 +1,138 @@
+.dialog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+
+.half-width {
+    flex: 1;
+}
+
+/* Compact Form Fields */
+::ng-deep .dialog-form .mat-mdc-form-field-flex {
+    height: 52px !important;
+}
+
+::ng-deep .dialog-form .mat-mdc-text-field-wrapper {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+}
+
+/* Price Prefix Styling */
+::ng-deep .half-width .mat-mdc-form-field-icon-prefix {
+    padding-right: 4px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+::ng-deep .half-width .mat-mdc-form-field-icon-prefix span {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+/* Hide number spinners */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.image-section {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+    padding-top: 4px;
+    width: 100%;
+}
+
+.image-section mat-form-field {
+    flex: 1;
+    min-width: 0;
+}
+
+.upload-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding-top: 4px;
+    flex-shrink: 0;
+}
+
+.file-info {
+    font-size: 0.65rem;
+    color: var(--primary);
+    background: rgba(79, 70, 229, 0.08);
+    padding: 2px 8px;
+    border-radius: 8px;
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.preview-container {
+    margin-top: 16px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.01);
+    border: 1px dashed rgba(79, 70, 229, 0.15);
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.preview-img {
+    max-width: 160px;
+    max-height: 160px;
+    border-radius: var(--border-radius-md);
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+mat-dialog-actions {
+    padding: 16px 24px !important;
+    gap: 12px;
+    background: rgba(248, 250, 252, 0.5);
+    border-top: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+mat-dialog-content {
+    padding: 0 24px 24px 24px !important;
+    overflow-x: hidden !important;
+}
+
+mat-dialog-actions button {
+    height: 44px;
+    padding: 0 20px !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+}
+
+/* Force dialog sizing overrides */
+::ng-deep .cdk-overlay-pane {
+    max-width: 95vw !important;
+}

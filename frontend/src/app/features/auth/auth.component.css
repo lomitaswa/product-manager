@@ -1,0 +1,196 @@
+.auth-container {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background: radial-gradient(circle at 0% 0%, rgba(79, 70, 229, 0.08) 0, transparent 40%),
+        radial-gradient(circle at 100% 100%, rgba(147, 51, 234, 0.08) 0, transparent 40%);
+}
+
+.auth-wrapper {
+    width: 100%;
+    max-width: 480px;
+    perspective: 1000px;
+}
+
+.auth-card {
+    padding: 48px 40px;
+    border-radius: 24px !important;
+    animation: slideUp 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.brand-logo mat-icon {
+    color: #4f46e5;
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+.brand-name {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 40px;
+    display: block !important;
+}
+
+.auth-header .mat-mdc-card-header-text {
+    margin: 0 !important;
+}
+
+.auth-header .mat-mdc-card-title {
+    font-size: 1.8rem !important;
+    font-weight: 800 !important;
+    color: var(--text-primary);
+    margin-bottom: 8px !important;
+    letter-spacing: -0.03em;
+}
+
+.auth-header .mat-mdc-card-subtitle {
+    font-size: 1rem !important;
+    color: var(--text-secondary) !important;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+mat-form-field {
+    transition: transform 0.2s ease;
+}
+
+mat-form-field:focus-within {
+    transform: translateY(-2px);
+}
+
+.error-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: #fff1f2;
+    border: 1px solid #ffe4e6;
+    border-radius: 12px;
+    color: #e11d48;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 8px;
+    animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.actions {
+    margin-top: 16px;
+}
+
+.submit-btn {
+    height: 56px !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    border-radius: 14px !important;
+    background: linear-gradient(135deg, #4f46e5, #9333ea) !important;
+    color: white !important;
+    letter-spacing: 0.01em;
+    transition: var(--transition-standard) !important;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2) !important;
+}
+
+.submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3) !important;
+    filter: brightness(1.1);
+}
+
+.submit-btn:disabled {
+    opacity: 0.6;
+    background: #e2e8f0 !important;
+    color: #94a3b8 !important;
+    box-shadow: none !important;
+}
+
+.auth-footer {
+    margin-top: 32px;
+    text-align: center;
+}
+
+.auth-footer p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.auth-footer a {
+    color: #4f46e5;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 4px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.auth-footer a:hover {
+    color: #4338ca;
+    text-decoration: underline;
+}
+
+::ng-deep .auth-form .mat-mdc-form-field-subscript-wrapper {
+    padding-left: 44px !important;
+}
+
+::ng-deep .auth-form .mat-mdc-form-field-icon-prefix {
+    padding-right: 12px !important;
+    color: var(--text-secondary);
+}
+
+::ng-deep .auth-form .mat-mdc-form-field.mat-focused .mat-mdc-form-field-icon-prefix {
+    color: var(--primary);
+}

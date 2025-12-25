@@ -1,0 +1,97 @@
+<div class="page-header">
+    <div class="header-main">
+        <h1>Products</h1>
+    </div>
+
+    <div class="search-bar-row">
+        <div class="search-filters" [formGroup]="filterForm">
+            <mat-form-field appearance="outline" class="search-field">
+                <mat-icon matPrefix>search</mat-icon>
+                <input matInput formControlName="search" placeholder="Search products...">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="filter-select">
+                <mat-select formControlName="category_id">
+                    <mat-option value="">All Categories</mat-option>
+                    <mat-option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="filter-select-small">
+                <mat-select formControlName="sortBy">
+                    <mat-option value="price">Price</mat-option>
+                    <mat-option value="name">Name</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="filter-select-small">
+                <mat-select formControlName="sortOrder">
+                    <mat-option value="asc">
+                        {{ filterForm.get('sortBy')?.value === 'price' ? 'Low to High' : 'Ascending' }}
+                    </mat-option>
+                    <mat-option value="desc">
+                        {{ filterForm.get('sortBy')?.value === 'price' ? 'High to Low' : 'Descending' }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <button mat-flat-button class="add-btn" (click)="openAddProductDialog()">
+            <mat-icon>add_circle</mat-icon>
+            <span>Add Product</span>
+        </button>
+    </div>
+</div>
+
+<div class="product-container">
+    <div *ngIf="isLoading" class="loader-overlay">
+        <mat-spinner diameter="50"></mat-spinner>
+    </div>
+
+    <mat-card class="table-card">
+        <table mat-table [dataSource]="products" class="full-width">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let product">
+                    <div class="product-cell">
+                        <img [src]="product.image_url || 'https://via.placeholder.com/40'" class="product-thumb"
+                            alt="thumb">
+                        <span class="product-name">{{ product.name }}</span>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="category_name">
+                <th mat-header-cell *matHeaderCellDef>Category</th>
+                <td mat-cell *matCellDef="let product">{{ product.category_name || 'N/A' }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef>Price</th>
+                <td mat-cell *matCellDef="let product" class="price-cell">{{ product.price |
+                    currency:'INR':'symbol-narrow' }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let product">
+                    <div class="actions">
+                        <button mat-icon-button color="primary" (click)="openEditProductDialog(product)" title="Edit">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" (click)="deleteProduct(product.id)" title="Delete">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [length]="totalProducts" [pageSize]="pageSize" [pageIndex]="currentPage - 1"
+            [pageSizeOptions]="[5, 10, 25, 100]" (page)="handlePageEvent($event)" showFirstLastButtons>
+        </mat-paginator>
+    </mat-card>
+</div>

@@ -1,0 +1,1 @@
+ALTER TABLE async_jobs ADD COLUMN format VARCHAR(10);

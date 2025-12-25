@@ -1,0 +1,47 @@
+<mat-toolbar class="glass-header" *ngIf="store.isAuthenticated()">
+  <div class="header-container">
+    <span class="brand">
+      <mat-icon>inventory_2</mat-icon>
+      <span>Product Manager</span>
+    </span>
+
+    <div class="nav-links">
+      <button mat-button routerLink="/products" routerLinkActive="active">
+        <mat-icon>grid_view</mat-icon>
+        <span>Products</span>
+      </button>
+      <button mat-button routerLink="/categories" routerLinkActive="active">
+        <mat-icon>category</mat-icon>
+        <span>Categories</span>
+      </button>
+      <button mat-button routerLink="/reports" routerLinkActive="active">
+        <mat-icon>analytics</mat-icon>
+        <span>Reports</span>
+      </button>
+    </div>
+
+    <span class="spacer"></span>
+
+    <div class="nav-user">
+      <div class="user-info">
+        <div class="user-avatar">
+          {{ (store.data()?.name || store.data()?.email || '?').charAt(0).toUpperCase() }}
+        </div>
+        <div class="user-details">
+          <span class="user-name">{{ store.data()?.name || 'User' }}</span>
+          <span class="user-email text-muted">{{ store.data()?.email }}</span>
+        </div>
+      </div>
+      <button mat-flat-button class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </div>
+  </div>
+</mat-toolbar>
+
+<main [class.has-nav]="store.isAuthenticated()">
+  <div class="container main-content">
+    <router-outlet></router-outlet>
+  </div>
+</main>

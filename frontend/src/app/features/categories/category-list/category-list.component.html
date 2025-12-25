@@ -1,0 +1,57 @@
+<div class="page-header">
+    <div class="header-main">
+        <h1>Category Management</h1>
+    </div>
+
+    <mat-card class="add-card">
+        <mat-card-content class="add-section">
+            <mat-form-field appearance="outline" class="add-field">
+                <mat-label>New Category Name</mat-label>
+                <input matInput [(ngModel)]="newCategoryName" placeholder="e.g. Health & Beauty">
+                <mat-icon matPrefix>category</mat-icon>
+            </mat-form-field>
+            <button mat-flat-button color="primary" (click)="addCategory()" [disabled]="!newCategoryName.trim()">
+                <mat-icon>add</mat-icon> Add Category
+            </button>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<div class="category-grid">
+    <div *ngIf="isLoading" class="loader-overlay">
+        <mat-spinner diameter="50"></mat-spinner>
+    </div>
+
+    <mat-card *ngFor="let category of categories" class="category-card">
+        <mat-card-content>
+            <div *ngIf="editingCategory?.id !== category.id; else editMode">
+                <div class="card-layout">
+                    <div class="card-info">
+                        <span class="category-name">{{ category.name }}</span>
+                    </div>
+                    <div class="card-actions">
+                        <button mat-icon-button color="primary" (click)="startEdit(category)" title="Edit">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" (click)="deleteCategory(category.id)" title="Delete">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #editMode>
+                <div class="edit-section">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Edit Category Name</mat-label>
+                        <input matInput [(ngModel)]="editingCategory!.name" autofocus>
+                    </mat-form-field>
+                    <div class="edit-actions">
+                        <button mat-raised-button color="primary" (click)="saveEdit()">Save</button>
+                        <button mat-button (click)="cancelEdit()">Cancel</button>
+                    </div>
+                </div>
+            </ng-template>
+        </mat-card-content>
+    </mat-card>
+</div>

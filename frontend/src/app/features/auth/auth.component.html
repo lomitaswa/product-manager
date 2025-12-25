@@ -1,0 +1,77 @@
+<div class="auth-container">
+    <div class="auth-wrapper">
+        <mat-card class="auth-card glass-effect">
+            <mat-card-header class="auth-header">
+                <div class="brand-logo">
+                    <mat-icon>inventory_2</mat-icon>
+                    <span class="brand-name">Product Manager</span>
+                </div>
+                <mat-card-title>{{ isLoginMode() ? 'Welcome Back' : 'Join Us' }}</mat-card-title>
+                <mat-card-subtitle>
+                    {{ isLoginMode() ? 'Please enter your details to sign in' : 'Create an account to start managing
+                    products' }}
+                </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="auth-form">
+                    <mat-form-field appearance="outline" *ngIf="!isLoginMode()" class="full-width">
+                        <mat-label>Name</mat-label>
+                        <mat-icon matPrefix>person_outline</mat-icon>
+                        <input matInput formControlName="name" placeholder="John Doe">
+                        <mat-error *ngIf="authForm.get('name')?.invalid">
+                            Name is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Email Address</mat-label>
+                        <mat-icon matPrefix>mail_outline</mat-icon>
+                        <input matInput type="email" formControlName="email" placeholder="name@example.com">
+                        <mat-error *ngIf="authForm.get('email')?.invalid">
+                            Please enter a valid email
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Password</mat-label>
+                        <mat-icon matPrefix>lock_outline</mat-icon>
+                        <input matInput type="password" formControlName="password" placeholder="••••••••">
+                        <mat-error *ngIf="authForm.get('password')?.invalid">
+                            Password must be at least 6 characters
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" *ngIf="!isLoginMode()" class="full-width">
+                        <mat-label>Confirm Password</mat-label>
+                        <mat-icon matPrefix>shield_outlined</mat-icon>
+                        <input matInput type="password" formControlName="confirmPassword" placeholder="••••••••">
+                        <mat-error *ngIf="authForm.hasError('mismatch') && authForm.get('confirmPassword')?.touched">
+                            Passwords do not match
+                        </mat-error>
+                    </mat-form-field>
+
+                    <div class="error-banner" *ngIf="store.error()">
+                        <mat-icon>error_outline</mat-icon>
+                        <span>{{ store.error() }}</span>
+                    </div>
+
+                    <div class="actions">
+                        <button mat-flat-button type="submit" class="submit-btn full-width"
+                            [disabled]="authForm.invalid || store.isLoading()">
+                            <span *ngIf="!store.isLoading()">{{ isLoginMode() ? 'Sign In' : 'Create Account' }}</span>
+                            <mat-spinner diameter="24" *ngIf="store.isLoading()"></mat-spinner>
+                        </button>
+                    </div>
+
+                    <div class="auth-footer">
+                        <p>
+                            {{ isLoginMode() ? "New here?" : "Already member?" }}
+                            <a (click)="toggleMode()">{{ isLoginMode() ? 'Create an account' : 'Sign in instead' }}</a>
+                        </p>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
